@@ -1,66 +1,311 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Una Constelación Para Ti 💖</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flores Amarillas con Amor 🌻</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle, #1a1a1a 0%, #050505 100%);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* Pantalla de Inicio */
+        #overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: 1.5s;
+        }
+
+        .btn-abrir {
+            padding: 15px 35px;
+            font-size: 1.3rem;
+            background: #ffd700;
+            color: #000;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            transition: 0.3s;
+        }
+
+        .btn-abrir:hover { transform: scale(1.1); background: #fff; }
+
+        /* Contenedor Principal */
+        .content {
+            opacity: 0;
+            transition: 2.5s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #ffd700;
+            margin-bottom: 0px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        /* EL RAMITO */
+        .bouquet {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Tallos que se juntan */
+        .stems-container {
+            position: absolute;
+            bottom: 50px;
+            width: 100%;
+            height: 200px;
+        }
+
+        .stem {
+            position: absolute;
+            width: 5px;
+            height: 220px;
+            background: linear-gradient(to top, #1b5e20, #4caf50);
+            bottom: 0;
+            left: 50%;
+            transform-origin: bottom center;
+            border-radius: 5px;
+        }
+
+        /* Posiciones de los tallos */
+        .s1 { transform: translateX(-50%) rotate(-15deg); }
+        .s2 { transform: translateX(-50%) rotate(-5deg); }
+        .s3 { transform: translateX(-50%) rotate(5deg); }
+        .s4 { transform: translateX(-50%) rotate(15deg); }
+
+        /* Flores */
+        .flower {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .center {
+            position: absolute;
+            width: 30px; height: 30px;
+            background: #3e2723;
+            border-radius: 50%;
+            top: 25px; left: 25px;
+            z-index: 10;
+            box-shadow: inset 0 0 5px #000;
+        }
+
+        .petal {
+            position: absolute;
+            background: #ffd700;
+            width: 25px; height: 45px;
+            border-radius: 50% 50% 50% 50% / 80% 80% 20% 20%;
+            left: 27px;
+            transform-origin: bottom center;
+            box-shadow: inset 0 0 8px #fbc02d;
+        }
+
+        /* Rotación de pétalos */
+        .p1 { transform: rotate(0deg); } .p2 { transform: rotate(45deg); }
+        .p3 { transform: rotate(90deg); } .p4 { transform: rotate(135deg); }
+        .p5 { transform: rotate(180deg); } .p6 { transform: rotate(225deg); }
+        .p7 { transform: rotate(270deg); } .p8 { transform: rotate(315deg); }
+
+        /* EL LAZO (MOÑO) */
+        .ribbon-container {
+            position: absolute;
+            bottom: 80px;
+            z-index: 50;
+        }
+
+        .bow {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background: #d32f2f; /* Rojo del lazo */
+            border-radius: 5px;
+        }
+
+        /* Lados del moño */
+        .bow::before, .bow::after {
+            content: '';
+            position: absolute;
+            width: 45px;
+            height: 35px;
+            background: #f44336;
+            border: 2px solid #b71c1c;
+            top: -10px;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .bow::before { left: -35px; transform: rotate(-20deg); }
+        .bow::after { right: -35px; transform: rotate(20deg); }
+
+        /* Colas del lazo */
+        .tails {
+            position: absolute;
+            top: 15px;
+            left: 5px;
+            width: 30px;
+            height: 40px;
+            background: #d32f2f;
+            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 50% 80%, 0% 100%);
+            transform: rotate(-15deg);
+        }
+
+        .tails.right {
+            left: auto;
+            right: 5px;
+            transform: rotate(15deg);
+        }
+
+        /* Animación de Pétalos Cayendo */
+        .falling-petal {
+            position: absolute;
+            background: #ffeb3b;
+            border-radius: 150% 0 150% 0;
+            z-index: 5;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); }
+        }
+
+        .dedicatoria {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            max-width: 85%;
+            font-weight: 300;
+            line-height: 1.4;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- PANTALLA DE CARGA CON TEMÁTICA ESTELAR -->
-  <div id="pre-carga" class="pantalla-inicial">
-    <div class="contenido-pre-carga">
-      <h1>Un evento celestial está por ocurrir...</h1>
-      <p>La constelación "Jhomarita 💖" se alineará en:</p>
-      <div id="countdown" class="countdown-timer"></div>
+    <div id="overlay">
+        <h2 style="font-family: 'Dancing Script'; font-size: 2rem; margin-bottom: 20px;">He guardado esto para ti...</h2>
+        <button class="btn-abrir" onclick="iniciar()">Ver mi regalo 🎁</button>
     </div>
-  </div>
 
-  <div id="star-background"></div>
+    <!-- MÚSICA -->
+    <audio id="musica" loop>
+        <source src="Musica/Mike Bahía ft. Greeicy - Esta Noche (Letra).mp3" type="audio/mpeg">
+    </audio>
 
-  <!-- Contenido principal, oculto por defecto -->
-  <main id="main-content" class="container hidden">
-    <h1 class="titulo">Una Aventura Escrita en las Estrellas ✨</h1>
-    <button id="btnEmpezar" class="btn" onclick="empezarJuego()">🚀 Iniciar Viaje Estelar</button>
+    <div class="content" id="main-content">
+        <h1>¡Feliz 21 de Marzo!</h1>
+        
+        <div class="bouquet">
+            <div class="stems-container">
+                <!-- Tallo 1 -->
+                <div class="stem s1">
+                    <div class="flower">
+                        <div class="center"></div>
+                        <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div>
+                        <div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div>
+                    </div>
+                </div>
+                <!-- Tallo 2 -->
+                <div class="stem s2">
+                    <div class="flower">
+                        <div class="center"></div>
+                        <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div>
+                        <div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div>
+                    </div>
+                </div>
+                <!-- Tallo 3 -->
+                <div class="stem s3">
+                    <div class="flower">
+                        <div class="center"></div>
+                        <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div>
+                        <div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div>
+                    </div>
+                </div>
+                <!-- Tallo 4 -->
+                <div class="stem s4">
+                    <div class="flower">
+                        <div class="center"></div>
+                        <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div>
+                        <div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div>
+                    </div>
+                </div>
+            </div>
 
-    <section id="juegos" class="hidden">
-      <!-- Preguntas del 1 al 9 -->
-      <div class="juego hidden" id="juego1"><p>¿Cuál era el nombre que te iban a poner?</p><input type="text" id="resp1" autocomplete="off" /><button class="btn" onclick="verificarResp(1)">Responder</button></div>
-      <div class="juego hidden" id="juego2"><p>¿Dónde fue nuestro primer beso?</p><input type="text" id="resp2" autocomplete="off" /><button class="btn" onclick="verificarResp(2)">Responder</button></div>
-      <div class="juego hidden" id="juego3"><p>Si tuvieras que elegir: Opción 1 (Gomitas, Torta, Frappuccinos) o Opción 2 (Dormir 3 horas más)... ¿qué prefieres?</p><input type="text" id="resp3" placeholder="Escribe 'Opción 1' o 'Opción 2'" autocomplete="off" /><button class="btn" onclick="verificarResp(3)">Decidir</button></div>
-      <div class="juego hidden" id="juego4"><p>¿Qué recuerdo te llevaste de la playa?</p><input type="text" id="resp4" autocomplete="off" /><button class="btn" onclick="verificarResp(4)">Responder</button></div>
-      <div class="juego hidden" id="juego5"><p>¿Donde te acompañe la primera vez que salimos?</p><input type="text" id="resp5" autocomplete="off" /><button class="btn" onclick="verificarResp(5)">Responder</button></div>
-      <div class="juego hidden" id="juego6"><p>¿Recuerdas la primera canción que te dediqué en la primera web que te cree?</p><input type="text" id="resp6" autocomplete="off" /><button class="btn" onclick="verificarResp(6)">Recordar</button></div>
-      <div class="juego hidden" id="juego7"><p>¿Eres tóxica? 🙃</p><input type="text" id="resp7" autocomplete="off" /><button class="btn" onclick="verificarResp(7)">Responder</button></div>
-      <div class="juego hidden" id="juego8"><p>¿Eres celosa? 😜</p><input type="text" id="resp8" autocomplete="off" /><button class="btn" onclick="verificarResp(8)">Responder</button></div>
-      <div class="juego hidden" id="juego9"><p>Ahora mismo... ¿qué color estás usando? 👀</p><input type="text" id="resp9" placeholder="No seas tímida..." autocomplete="off" /><button class="btn" onclick="verificarResp(9)">Contar</button></div>
+            <!-- EL LAZO -->
+            <div class="ribbon-container">
+                <div class="bow"></div>
+                <div class="tails"></div>
+                <div class="tails right"></div>
+            </div>
+        </div>
 
-      <!-- 10. Mensaje Final -->
-      <div class="juego hidden" id="juego10">
-        <p>Para terminar, deja un deseo para nosotros pidiéndoselo a una estrella fugaz 🌠</p>
-        <input type="text" id="resp10" autocomplete="off" />
-        <button class="btn" onclick="finalizarJuego()">Ver la Sorpresa Final</button>
-      </div>
-    </section>
+        <div class="dedicatoria">
+            <p>Hoy te entrego este ramito de flores amarillas.</p>
+            <p>Son un símbolo de la alegría que traes a mis días y la felicida q poco a poco he logrado conocer a tu lado.</p>
+            <p style="font-weight: 600; color: #ffd700;">¡Todo comenzo, por ese beso que no te negaste!</p>
+            <p style="font-weight: 600; color: #be2278;">¡Feliz 21 de Marzo Lind. !</p>
+        </div>
+    </div>
 
-    <div id="mensajeFlotante" class="mensaje hidden"></div>
+    <script>
+        function iniciar() {
+            // Música
+            const audio = document.getElementById('musica');
+            audio.play().catch(e => console.log("Audio listo"));
 
-    <section id="carta" class="hidden">
-      <div id="tiempoContador" class="contador-final"></div>
-      <div id="textoCarta" class="texto-carta"></div>
-      <div id="mediaContainer" class="galeria"></div>
-      <div class="controles-media">
-        <button onclick="cambiarMedia(-1)">☾</button>
-        <button onclick="cambiarMedia(1)">☽</button>
-      </div>
-      <audio id="audio" src="audio/seguro.mp3" preload="auto" loop></audio>
-    </section>
-  </main>
+            // Desvanecer inicio
+            document.getElementById('overlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('overlay').style.display = 'none';
+                document.getElementById('main-content').style.opacity = '1';
+            }, 1500);
 
-  <script src="script.js"></script>
+            // Pétalos constantes
+            setInterval(createPetal, 400);
+        }
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('falling-petal');
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 3 + 4 + 's';
+            petal.style.opacity = Math.random();
+            const size = Math.random() * 15 + 10;
+            petal.style.width = size + 'px';
+            petal.style.height = size + 'px';
+            
+            document.body.appendChild(petal);
+            setTimeout(() => petal.remove(), 7000);
+        }
+    </script>
 </body>
 </html>
