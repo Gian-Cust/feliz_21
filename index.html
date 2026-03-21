@@ -1,311 +1,304 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flores Amarillas con Amor 🌻</title>
+    <title>Para alguien especial 🌻</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@300;500&display=swap');
 
-        body {
+        :root {
+            --yellow: #ffdf00;
+            --glow: #ffee00ad;
+        }
+
+        body,
+        html {
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle, #1a1a1a 0%, #050505 100%);
+            width: 100%;
+            height: 100%;
+            background-color: #050505;
             color: white;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            text-align: center;
         }
 
-        /* Pantalla de Inicio */
+        /* Pantalla de Inicio (El Sobre) */
         #overlay {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #1a1a1a, #000);
+            z-index: 1000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-            transition: 1.5s;
+            transition: opacity 1s ease;
         }
 
-        .btn-abrir {
-            padding: 15px 35px;
-            font-size: 1.3rem;
-            background: #ffd700;
-            color: #000;
-            border: none;
-            border-radius: 30px;
+        .envelope {
+            font-size: 80px;
             cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-            transition: 0.3s;
+            filter: drop-shadow(0 0 15px var(--yellow));
+            transition: transform 0.3s;
         }
 
-        .btn-abrir:hover { transform: scale(1.1); background: #fff; }
+        .envelope:hover {
+            transform: scale(1.1);
+        }
+
+        .click-text {
+            margin-top: 20px;
+            font-family: 'Dancing Script', cursive;
+            color: var(--yellow);
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            animation: pulse 2s infinite;
+        }
 
         /* Contenedor Principal */
-        .content {
-            opacity: 0;
-            transition: 2.5s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
-            color: #ffd700;
-            margin-bottom: 0px;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
-
-        /* EL RAMITO */
-        .bouquet {
-            position: relative;
-            width: 300px;
-            height: 400px;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* Tallos que se juntan */
-        .stems-container {
-            position: absolute;
-            bottom: 50px;
-            width: 100%;
-            height: 200px;
-        }
-
-        .stem {
-            position: absolute;
-            width: 5px;
-            height: 220px;
-            background: linear-gradient(to top, #1b5e20, #4caf50);
-            bottom: 0;
-            left: 50%;
-            transform-origin: bottom center;
-            border-radius: 5px;
-        }
-
-        /* Posiciones de los tallos */
-        .s1 { transform: translateX(-50%) rotate(-15deg); }
-        .s2 { transform: translateX(-50%) rotate(-5deg); }
-        .s3 { transform: translateX(-50%) rotate(5deg); }
-        .s4 { transform: translateX(-50%) rotate(15deg); }
-
-        /* Flores */
-        .flower {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .center {
-            position: absolute;
-            width: 30px; height: 30px;
-            background: #3e2723;
-            border-radius: 50%;
-            top: 25px; left: 25px;
+        .container {
+            text-align: center;
+            max-width: 90%;
             z-index: 10;
-            box-shadow: inset 0 0 5px #000;
+            display: none;
+            /* Se activa al hacer click */
         }
 
-        .petal {
+        .sunflower-main {
+            font-size: 100px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 25px gold);
+        }
+
+        .message-box {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 223, 0, 0.2);
+        }
+
+        .text-p {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            line-height: 1.6;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .highlight {
+            color: var(--yellow);
+            font-weight: bold;
+            display: block;
+            margin: 15px 0;
+            font-size: 2.2rem;
+            text-shadow: 0 0 10px var(--glow);
+        }
+
+        .kiss-line {
+            font-family: 'Montserrat', sans-serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #ddd;
+            border-left: 3px solid var(--yellow);
+            padding-left: 15px;
+            margin: 20px auto;
+            max-width: 80%;
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--yellow);
+            margin-top: 30px;
+        }
+
+        /* Lluvia de flores y partículas */
+        .particle {
             position: absolute;
-            background: #ffd700;
-            width: 25px; height: 45px;
-            border-radius: 50% 50% 50% 50% / 80% 80% 20% 20%;
-            left: 27px;
-            transform-origin: bottom center;
-            box-shadow: inset 0 0 8px #fbc02d;
-        }
-
-        /* Rotación de pétalos */
-        .p1 { transform: rotate(0deg); } .p2 { transform: rotate(45deg); }
-        .p3 { transform: rotate(90deg); } .p4 { transform: rotate(135deg); }
-        .p5 { transform: rotate(180deg); } .p6 { transform: rotate(225deg); }
-        .p7 { transform: rotate(270deg); } .p8 { transform: rotate(315deg); }
-
-        /* EL LAZO (MOÑO) */
-        .ribbon-container {
-            position: absolute;
-            bottom: 80px;
-            z-index: 50;
-        }
-
-        .bow {
-            position: relative;
-            width: 40px;
-            height: 20px;
-            background: #d32f2f; /* Rojo del lazo */
-            border-radius: 5px;
-        }
-
-        /* Lados del moño */
-        .bow::before, .bow::after {
-            content: '';
-            position: absolute;
-            width: 45px;
-            height: 35px;
-            background: #f44336;
-            border: 2px solid #b71c1c;
-            top: -10px;
-            border-radius: 50%;
-            z-index: -1;
-        }
-
-        .bow::before { left: -35px; transform: rotate(-20deg); }
-        .bow::after { right: -35px; transform: rotate(20deg); }
-
-        /* Colas del lazo */
-        .tails {
-            position: absolute;
-            top: 15px;
-            left: 5px;
-            width: 30px;
-            height: 40px;
-            background: #d32f2f;
-            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 50% 80%, 0% 100%);
-            transform: rotate(-15deg);
-        }
-
-        .tails.right {
-            left: auto;
-            right: 5px;
-            transform: rotate(15deg);
-        }
-
-        /* Animación de Pétalos Cayendo */
-        .falling-petal {
-            position: absolute;
-            background: #ffeb3b;
-            border-radius: 150% 0 150% 0;
-            z-index: 5;
+            pointer-events: none;
             animation: fall linear infinite;
         }
 
         @keyframes fall {
-            to { transform: translateY(100vh) rotate(720deg); }
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
-        .dedicatoria {
-            margin-top: 10px;
-            font-size: 1.1rem;
-            max-width: 85%;
-            font-weight: 300;
-            line-height: 1.4;
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Estrellas de fondo */
+        #stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
     </style>
 </head>
+
 <body>
 
-    <div id="overlay">
-        <h2 style="font-family: 'Dancing Script'; font-size: 2rem; margin-bottom: 20px;">He guardado esto para ti...</h2>
-        <button class="btn-abrir" onclick="iniciar()">Ver mi regalo 🎁</button>
+    <!-- Pantalla de inicio -->
+    <div id="overlay" onclick="startExperience()">
+        <div class="envelope">✉️</div>
+        <div class="click-text">Tengo un detalle para ti... <br> (Haz clic para abrir)</div>
     </div>
 
-    <!-- MÚSICA -->
+    <canvas id="stars"></canvas>
+
+    <!-- Música de fondo -->
+    <!-- He puesto un piano suave, puedes cambiar el link por cualquier archivo .mp3 -->
     <audio id="musica" loop>
-        <source src="Musica/Mike Bahía ft. Greeicy - Esta Noche (Letra).mp3" type="audio/mpeg">
+        <source src="Musica/Camila  Todo Cambió [Letra].mp3" type="audio/mpeg">
     </audio>
 
-    <div class="content" id="main-content">
-        <h1>¡Feliz 21 de Marzo!</h1>
-        
-        <div class="bouquet">
-            <div class="stems-container">
-                <!-- Tallo 1 -->
-                <div class="stem s1">
-                    <div class="flower">
-                        <div class="center"></div>
-                        <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div>
-                        <div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div>
-                    </div>
-                </div>
-                <!-- Tallo 2 -->
-                <div class="stem s2">
-                    <div class="flower">
-                        <div class="center"></div>
-                        <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div>
-                        <div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div>
-                    </div>
-                </div>
-                <!-- Tallo 3 -->
-                <div class="stem s3">
-                    <div class="flower">
-                        <div class="center"></div>
-                        <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div>
-                        <div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div>
-                    </div>
-                </div>
-                <!-- Tallo 4 -->
-                <div class="stem s4">
-                    <div class="flower">
-                        <div class="center"></div>
-                        <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div>
-                        <div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div>
-                    </div>
-                </div>
+    <div class="container" id="mainContainer">
+        <div class="sunflower-main">🌻</div>
+
+        <div class="message-box">
+            <p class="text-p">Hoy te entrego este ramito de <span style="color:var(--yellow)">flores amarillas.</span>
+            </p>
+
+            <p class="text-p">Son un símbolo de la alegría que traes a mis días y la felicidad que poco a poco he
+                logrado conocer a tu lado.</p>
+
+            <div class="kiss-line">
+                "¡Todo comenzó, por ese beso que no te negaste!"
             </div>
 
-            <!-- EL LAZO -->
-            <div class="ribbon-container">
-                <div class="bow"></div>
-                <div class="tails"></div>
-                <div class="tails right"></div>
+            <div class="signature">
+                ¡Feliz 21 de Marzo Lind.! 💛
             </div>
-        </div>
-
-        <div class="dedicatoria">
-            <p>Hoy te entrego este ramito de flores amarillas.</p>
-            <p>Son un símbolo de la alegría que traes a mis días y la felicida q poco a poco he logrado conocer a tu lado.</p>
-            <p style="font-weight: 600; color: #ffd700;">¡Todo comenzo, por ese beso que no te negaste!</p>
-            <p style="font-weight: 600; color: #be2278;">¡Feliz 21 de Marzo Lind. !</p>
         </div>
     </div>
 
     <script>
-        function iniciar() {
-            // Música
+        function startExperience() {
+            // Iniciar música
             const audio = document.getElementById('musica');
-            audio.play().catch(e => console.log("Audio listo"));
+            audio.play();
 
-            // Desvanecer inicio
+            // Ocultar overlay
             document.getElementById('overlay').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('overlay').style.display = 'none';
-                document.getElementById('main-content').style.opacity = '1';
-            }, 1500);
+                document.getElementById('mainContainer').style.display = 'block';
+                document.getElementById('mainContainer').style.animation = 'fadeInUp 2s forwards';
+            }, 1000);
 
-            // Pétalos constantes
-            setInterval(createPetal, 400);
+            // Iniciar lluvia de flores
+            setInterval(createFlower, 300);
         }
 
-        function createPetal() {
-            const petal = document.createElement('div');
-            petal.classList.add('falling-petal');
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.animationDuration = Math.random() * 3 + 4 + 's';
-            petal.style.opacity = Math.random();
-            const size = Math.random() * 15 + 10;
-            petal.style.width = size + 'px';
-            petal.style.height = size + 'px';
-            
-            document.body.appendChild(petal);
-            setTimeout(() => petal.remove(), 7000);
+        function createFlower() {
+            const flower = document.createElement('div');
+            const types = ['🌻', '🌼', '✨', '💛'];
+            flower.className = 'particle';
+            flower.innerHTML = types[Math.floor(Math.random() * types.length)];
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.fontSize = Math.random() * (30 - 15) + 15 + 'px';
+            flower.style.animationDuration = Math.random() * (6 - 3) + 3 + 's';
+            flower.style.opacity = Math.random();
+            document.body.appendChild(flower);
+
+            setTimeout(() => { flower.remove(); }, 6000);
         }
+
+        // Fondo de estrellas dinámico
+        const canvas = document.getElementById('stars');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const stars = [];
+        for (let i = 0; i < 150; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 1.5,
+                blink: Math.random() * 0.05
+            });
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "white";
+            stars.forEach(s => {
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+                ctx.fill();
+                s.size += Math.sin(Date.now() * 0.001 + s.x) * 0.01; // Efecto de parpadeo
+            });
+            requestAnimationFrame(drawStars);
+        }
+        drawStars();
     </script>
+
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </body>
+
 </html>
